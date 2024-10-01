@@ -88,7 +88,7 @@ int majorityElemMooreAlgo(vector<int> nums) {
 
     int freq = 0, ans = 0;
 
-    for(int i = 1; i < n; i++) {
+    for(int i = 0; i < n; i++) {
         if(freq == 0) {
             ans = nums[i];
         }
@@ -100,8 +100,39 @@ int majorityElemMooreAlgo(vector<int> nums) {
         }
     }
 
-
     return ans;
+}
+
+int majorityElemMooreAlgoUpdated(vector<int> nums) {
+    int n = nums.size();
+
+    int freq = 0, ans = 0;
+
+    for(int i = 0; i < n; i++) {
+        if(freq == 0) {
+            ans = nums[i];
+        }
+
+        if(ans == nums[i]) {
+            freq++;
+        } else {
+            freq--;
+        }
+    }
+
+    freq = 0;
+
+    for(int val : nums) {
+        if(val == ans) {
+            freq++;
+        }
+    }
+
+    if(freq > (n/2)) {
+        return ans;
+    }
+
+    return -1;
 }
 
 int main() {
@@ -130,6 +161,8 @@ int main() {
 
     vector<int> nums = {2, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 2, 2, 2};
     vector<int> nums2 = {2, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 2, 2, 2, 1};
+    vector<int> nums3 = {1, 2, 3, 4};
+    vector<int> nums4 = {1, 2, 3, 4, 5};
     // cout << "majority element is ==> " << majorityElem(nums) << "\n";
 
     // // Optimised Brute Force method
@@ -138,7 +171,14 @@ int main() {
 
     // Moore's Voting Algorithm
 
-    cout << "majority element is ==> " << majorityElemMooreAlgo(nums) << "\n";
+    cout << "majority element is (Moore's algo basic) ==> " << majorityElemMooreAlgo(nums) << "\n";
+    cout << "majority element is (Moore's algo basic) ==> " << majorityElemMooreAlgo(nums2) << "\n";
+    cout << "majority element is (Moore's algo basic) ==> " << majorityElemMooreAlgo(nums3) << "\n";
+    cout << "majority element is (Moore's algo basic) ==> " << majorityElemMooreAlgo(nums4) << "\n";
+    cout << "majority element is (Moore's algo updt) ==> " << majorityElemMooreAlgoUpdated(nums) << "\n";
+    cout << "majority element is (Moore's algo updt) ==> " << majorityElemMooreAlgoUpdated(nums2) << "\n";
+    cout << "majority element is (Moore's algo updt) ==> " << majorityElemMooreAlgoUpdated(nums3) << "\n";
+    cout << "majority element is (Moore's algo updt) ==> " << majorityElemMooreAlgoUpdated(nums4) << "\n";
 
 
 
